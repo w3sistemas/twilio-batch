@@ -38,7 +38,7 @@ class BatchController extends Controller
 
         ProcessBatch::dispatch($batch->id);
 
-        return redirect()->route('batches.index')->with('ok', 'Lote enviado para processamento.');
+        return redirect()->route('batches')->with('ok', 'Lote enviado para processamento.');
     }
 
     public function download(Batch $batch)
