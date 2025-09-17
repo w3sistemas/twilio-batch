@@ -3,16 +3,27 @@
 namespace App\Exports;
 
 use App\Models\Batch;
+use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class BatchResultExport implements FromCollection
+class BatchResultExport implements FromCollection, WithHeadings
 {
     public function __construct(private Batch $batch) {}
 
-    public function collection()
+    public function collection(): Collection|\Illuminate\Support\Collection
     {
         return $this->batch->items()->select([
-            'raw_number','e164','country_code','carrier','type','valid','lookup_error'
+            'raw_number',
+            'valid'
         ])->get();
+    }
+
+    public function headings(): array
+    {
+        return [
+            'Número',
+            'Válido'
+        ];
     }
 }

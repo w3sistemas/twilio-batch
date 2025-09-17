@@ -13,9 +13,16 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class BatchController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $batches = Batch::where('user_id', auth()->id())->latest()->paginate(10);
+        $batches = Batch::latest()->paginate(10);
+
+        if ($request->ajax()) {
+            // Retorna só o HTML da tabela (partial)
+            return view('batches.partials.table', compact('batches'));
+        }
+
+        // Retorna a view completa normalmente
         return view('batches.index', compact('batches'));
     }
 
