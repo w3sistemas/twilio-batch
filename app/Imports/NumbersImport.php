@@ -13,9 +13,11 @@ class NumbersImport implements ToCollection
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
-            $raw = trim((string)($row[0] ?? ''));
+
+            $raw = trim(implode(' ', $row->toArray()));
 
             if ($raw === '') continue;
+
             BatchItem::create([
                 'batch_id'   => $this->batchId,
                 'raw_number' => $raw,
