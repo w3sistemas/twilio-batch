@@ -12,7 +12,7 @@ class TwilioLookupService
     {
         try {
             $opts = ['type' => ['carrier']];
-            $res = $this->client->lookups->v2->phoneNumbers($number)->fetch($opts);
+            $res = $this->client->lookups->v1->phoneNumbers($number)->fetch($opts);
 
             return [
                 'valid'        => true,

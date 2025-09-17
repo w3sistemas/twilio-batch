@@ -15,6 +15,9 @@ class BatchResultExport implements FromCollection, WithHeadings
     {
         return $this->batch->items()->select([
             'raw_number',
+            'country_code',
+            'carrier',
+            'type',
             'valid'
         ])->get();
     }
@@ -23,6 +26,9 @@ class BatchResultExport implements FromCollection, WithHeadings
     {
         return [
             'Número',
+            'País',
+            'Operadora',
+            'Tipo',
             'Válido'
         ];
     }
